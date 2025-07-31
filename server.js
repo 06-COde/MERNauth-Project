@@ -10,11 +10,17 @@ const app = express();
 const PORT  = process.env.port || 4000;
 connectDB();
 
+// const allowedOrigins = ['http://localhost:5173', '']
+
 
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors({credentials: true}));
-
+app.use(
+  cors({
+    origin: "http://localhost:5173", // 👈 use frontend URL
+    credentials: true,               // 👈 allow cookies
+  })
+);
 
 app.get('/', (req,res)=>{
     res.send('"API Working');
